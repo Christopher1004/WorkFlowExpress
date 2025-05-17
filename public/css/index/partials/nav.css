@@ -1,0 +1,250 @@
+body {
+    margin: 0;
+    padding: 0;
+    padding-top: 70px;
+}
+
+.navbar {
+    z-index: 1000;
+    display: flex;
+    width: 100%;
+    padding-block: 20px;
+    overflow-x: auto;
+    background-color: var(--background);
+    border-bottom: 1px solid var(--gray);
+    height: 50px;
+    font-size: var(--f2);
+    font-family: "Work Sans", sans-serif;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    transition: transform 0.2s ease-in-out;
+}
+
+.navbar--hidden {
+    transform: translateY(-100%);
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+    margin: 0 30px;
+    height: 100%;
+    gap: 20px;
+}
+
+.logo img {
+    height: 30px;
+    width: auto;
+    border-right: 1px solid var(--gray);
+}
+
+.links {
+    display: flex;
+    gap: 15px;
+}
+
+.links a {
+    color: var(--gray);
+    font-size: 16px;
+    text-decoration: none;
+    font-family: "Work Sans", sans-serif;
+    transition: color 0.3s ease-in-out;
+}
+
+.links a.active {
+    color: var(--white);
+    font-weight: bold;
+}
+
+.links a:hover {
+    color: var(--white);
+    transition: color 0.3s ease-in-out;
+}
+
+.searchbarContainer {
+    flex-grow: 1;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.searchbar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--gray);
+    background-color: var(--darkgray);
+    padding-inline: 15px;
+    border-radius: 5px;
+}
+
+.searchbar img {
+    height: 20px;
+    margin-right: 10px;
+}
+
+.searchbar-input {
+    background: none;
+    border: none;
+    font-family: "Work Sans", sans-serif;
+    color: #FFFFFF;
+    width: 100%;
+    font-size: 14px;
+}
+
+.searchbar-input::placeholder {
+    color: var(--gray);
+}
+
+.searchbar-input:focus {
+    outline: none;
+}
+
+.buttonsContainer {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+}
+
+.buttonNav {
+    padding: 8px 20px;
+    height: 100%;
+    font-size: 14px;
+    font-family: "Work Sans", sans-serif;
+    border-radius: 5px;
+    cursor: pointer;
+    white-space: nowrap;
+    border: none;
+}
+
+a {
+    height: 100%;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+}
+
+.entrar {
+    background-color: var(--background);
+    color: var(--white);
+    border: none;
+}
+
+.registrar {
+    background-color: var(--primary);
+    color: #FFFFFF;
+    border: none;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.registrar:hover {
+    background-color: var(--tertiary);
+    transition: background-color 0.3s ease-in-out;
+}
+
+@media (max-width: 990px) {
+    .navbar {
+        overflow: visible;
+        height: auto;
+        overflow-x: auto;
+    }
+
+    .links, .searchbarContainer, .buttonsContainer {
+        display: none;
+        width: 100%;
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .nav-active {
+        height: 100vh;
+    }
+
+    .nav-active .links,
+    .nav-active .searchbarContainer,
+    .nav-active .buttonsContainer {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .hamburger {
+        display: block;
+        width: 30px;
+        height: 24px;
+        position: relative;
+        cursor: pointer;
+        margin-right: 15px;
+    }
+
+    .hamburger span {
+        display: block;
+        position: absolute;
+        height: 3px;
+        width: 100%;
+        background-color: var(--white);
+        border-radius: 3px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .hamburger span:nth-child(1) {
+        top: 0;
+    }
+
+    .hamburger span:nth-child(2) {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .hamburger span:nth-child(3) {
+        bottom: 0;
+    }
+
+    /* Animation when menu is active */
+    .nav-active .hamburger span:nth-child(1) {
+        transform: translateY(11px) rotate(45deg);
+    }
+
+    .nav-active .hamburger span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .nav-active .hamburger span:nth-child(3) {
+        transform: translateY(-11px) rotate(-45deg);
+    }
+    .container {
+        flex-direction: column;
+    }
+    .links {
+        flex-direction: column;
+        align-items: center;
+    }
+    .buttonsContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+    .buttonNav {
+        width: 100%;
+        padding: 15px;
+    }
+    .logo {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .searchbar {
+        height: 50px;
+    }
+}

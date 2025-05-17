@@ -1,0 +1,32 @@
+.artboard {
+    background-color: var(--white);
+    height: 460px;
+    margin: 4px;
+    padding: 0;
+    overflow: auto;
+    border-radius: 10px;
+}
+
+.artboard .content {
+    height: 3000px;
+    background-color: #1e1e1e;
+}
+
+.artboard::-webkit-scrollbar {
+    width: 8px;
+}
+
+.artboard::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.0);
+    border-radius: 4px;
+}
+
+.artboard::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+.artboard::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+

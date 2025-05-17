@@ -1,0 +1,46 @@
+<nav class="navbar">
+    <div class="container">
+        <div class="logo">
+            <img class="logo" src="/assets/image/logoWorkFlow-com-nome.svg" alt="logoWorkFlow">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div class="links">
+            <a href="/" class="links projetos active">Projetos</a>
+            <a href="/propostas" class="links propostas">Propostas</a>
+            <a href="#" class="links freeelancers">Freelancers</a>
+            <a href="#" class="links desafios">Desafios</a>
+        </div>
+        <div class="searchbarContainer">
+            <div class="searchbar">
+                <img src="/assets/image/search-icon.svg" alt="searchIcon" class="icon">
+                <input type="text" class="searchbar-input" placeholder="Buscar">
+            </div>
+        </div>
+        <div class="buttonsContainer">
+            <a href="/login">
+                <button class="buttonNav entrar">Entrar</button>
+            </a>
+            <a href="/register">
+                <button class="buttonNav registrar">Criar Conta</button>
+            </a>
+        </div>
+
+    </div>
+</nav>
+<script>
+    document.querySelectorAll('button[type="Register"]').forEach(btn => {
+        btn.addEventListener('click', function () {
+            window.location.href = './public/register/register.html';
+        });
+    });
+
+    document.querySelectorAll('button[type="Login"]').forEach(btn => {
+        btn.addEventListener('click', function () {
+            window.location.href = './public/login-user/login.html';
+        });
+    });
+</script>
