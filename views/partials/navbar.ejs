@@ -22,25 +22,60 @@
         </div>
         <div class="buttonsContainer">
             <a href="/login">
-                <button class="buttonNav entrar">Entrar</button>
+                <button class="buttonNav entrar" id="btnEntrar">Entrar</button>
             </a>
             <a href="/register">
-                <button class="buttonNav registrar">Criar Conta</button>
+                <button class="buttonNav registrar" id="btnCriarConta">Criar Conta</button>
             </a>
+            <div id="userControls" style="display:none; align-items: center; gap: 12px;">
+                <button id="btnAdd" class="buttonAdd" title="Adicionar novo">+</button>
+                <div id="userPhoto" class="userPhoto"></div>
+            </div>
         </div>
 
     </div>
 </nav>
-<script>
-    document.querySelectorAll('button[type="Register"]').forEach(btn => {
-        btn.addEventListener('click', function () {
-            window.location.href = './public/register/register.html';
-        });
-    });
+<style>
+    .buttonsContainer {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
 
-    document.querySelectorAll('button[type="Login"]').forEach(btn => {
-        btn.addEventListener('click', function () {
-            window.location.href = './public/login-user/login.html';
-        });
-    });
-</script>
+    /* Botão + circular */
+    .buttonAdd {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #3c38a6;
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+        user-select: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.3s ease;
+    }
+
+    .buttonAdd:hover {
+        background-color: #6f6dcc;
+    }
+
+    /* Avatar circular (div) */
+    .userPhoto {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #ddd;
+        /* cor padrão enquanto carrega */
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        cursor: pointer;
+        border: 3px solid #3c38a6;
+    }
+</style>
+<script type="module" src="/js/navBar-auth.js"></script>
