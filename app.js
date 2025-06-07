@@ -52,4 +52,4 @@ app.use('/confirmarEmail', confirmarEmail)
 
 
 
-module.exports = app
+module.exports = app;
