@@ -1,0 +1,446 @@
+@import "../../globals/globals.css";
+
+.section-1 {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+    width: 100%;
+}
+
+.section-1 h1 {
+    font-size: var(--f5);
+    text-align: center;
+}
+
+.section-2 {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    padding-inline: 30px;
+    gap: 10px;
+    flex-direction: row;
+    width: 100%;
+}
+
+.container-1 {
+    display: flex;
+    flex: 2;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.container-2 {
+    flex: 1;
+    flex-direction: column;
+    display: flex;
+    gap: 5px;
+}
+
+.form-container {
+    width: 100%;
+}
+
+.label-proposta {
+    font-size: var(--f2);
+    color: var(--white);
+    margin-bottom: 5px;
+    display: flex;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    color: var(--white);
+    font-size: var(--f2);
+    border-radius: 5px;
+    border:1px solid var(--gray);
+    background-color: var(--darkgray);
+}
+
+input:focus {
+    outline: none;
+    border: 1px solid var(--primary);
+}
+
+textarea:focus {
+    outline: none;
+    border: 1px solid var(--primary);
+}
+
+.form-container-valor {
+    display: flex;
+    margin-top: 5px;
+    width: 100%;
+    flex-direction: column;
+}
+
+.container-valor {
+    display: flex;
+    display: row;
+    gap: 5px;
+}
+
+.form-container-valor h3 {
+    font-size: var(--f2);
+    width: 100%;
+    color: var(--white);
+}
+
+.min, .max {
+    width: 100%;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    height:  60%;
+    font-family: 'work sans', sans-serif;
+    color: var(--white);
+    font-size: var(--f2);
+    border-radius: 5px;
+    border:1px solid var(--gray);
+    background: var(--darkgray);
+}
+
+.form-container-descricao {
+    width: 100%;
+    height: 100%;
+}
+
+.idade {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.menorIdade {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.menorIdade input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    background-color: var(--darkgray);
+    accent-color: var(--darkgray);
+}
+
+.form-container-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.button-forms {
+    background-color: var(--primary);
+    width: 100%;
+    font-family: 'work sans', sans-serif;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    color: var(--white);
+    transition: 0.3s;
+}
+
+.button-forms:hover {
+    background-color: var(--tertiary);
+    transition: 0.3s;
+}
+
+.selector-container {
+    background-color: var(--darkgray);
+    border: 1px solid var(--gray);
+    border-radius: 5px;
+    padding: 5px;
+    width: 100%;
+  }
+  
+  .selected-tags {
+    padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 10px;
+    gap: 5px;
+    background-color: var(--darkgray);
+  }
+  
+  .tag {
+    background-color: var(--secundary);
+    color: var(--white);
+    border: 1px solid var(--primary);
+    border-radius: 10px;
+    font-size: var(--f3);
+    padding: 4px 8px;
+    font-size: 12px;
+    font-family: 'work sans', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .tag .remover {
+    cursor: pointer;
+    font-size: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    background-color: none;
+    border-radius: 5px;
+    color: var(--white);
+  }
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid var(--gray);
+    background-color: var(--darkgray);
+    border-radius: 5px;
+    margin: 5px;
+    margin-bottom: 10px;
+  }
+  
+  #search-input {
+    flex: 1;
+    padding: 5px;
+    border: none;
+    outline: none;
+  }
+  
+  #clear-search {
+    background: none;
+    border: none;
+    color: var(--primary);
+    cursor: pointer;
+    padding: 5px;
+  }
+  
+  .options-list {
+    list-style: none;
+    max-height: 200px;
+    border: 1px solid var(--gray);
+    border-radius: 5px;
+    overflow-y: auto;
+    padding: 5px;
+  }
+  
+  .options-list li {
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    transition: background-color 0.2s;
+    border-radius: 4px;
+  }
+  
+  .options-list li:hover {
+    background-color: var(--gray);
+  }
+  
+  .options-list input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    accent-color: var(--primary);
+    cursor: pointer;
+  }
+  
+  .options-list label {
+    cursor: pointer;
+    font-size: var(--f11);
+    color: var(--white);
+    user-select: none;
+    flex: 1;
+  }
+  
+  .options-list::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .options-list::-webkit-scrollbar-track {
+    background: var(--darkgray);
+    border-radius: 4px;
+  }
+  
+  .options-list::-webkit-scrollbar-thumb {
+    background: var(--gray);
+    border-radius: 4px;
+  }
+  
+  .options-list::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+  }
+  .options-list li {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 15px;
+  margin: 4px;
+  background-color: var(--gray);
+  color: var(--white);
+  font-size: var(--f3);
+  cursor: pointer;
+  transition: 0.2s ease;
+  user-select: none;
+}
+
+.options-list li.selected {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background-color: #2c2c2c; 
+  color: white;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.modal-buttons {
+  margin-top: 20px;
+}
+
+.modal-buttons button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #444;      
+  color: white;                
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.modal-buttons button:hover {
+  background-color: #666;    
+}
+
+.hidden {
+  display: none;
+}
+
+input:disabled,
+textarea:disabled {
+  background-color: #444; 
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.selected-tags.locked {
+  opacity: 0.5;
+  pointer-events: none;
+  user-select: none;
+}
+
+#btn-voltar {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 12px 25px;
+  font-size: 16px;
+  background-color: #2c2c2c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+  display: none; 
+  z-index: 1000;
+}
+
+#btn-voltar:hover {
+  background-color: #444;
+}
+
+.proposta-card {
+  position: relative;
+  background-color: var(--darkgray);
+  color: var(--white);
+  padding: 20px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--gray);
+  box-shadow: 0 0 12px 2px rgba(155, 89, 255, 0.6); 
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.proposta-card:hover {
+  box-shadow: 0 0 18px 4px rgba(155, 89, 255, 0.8); 
+}
+
+
+.proposta-card .head {
+    font-size: var(--f4);
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+}
+
+.proposta-card .head:hover {
+    cursor: pointer;
+}
+
+.proposta-card .head .price {
+    font-weight: 500;
+    font-size: 24px;
+}
+
+.proposta-card .head h3 {
+    margin: 0px;
+}
+
+.proposta-card .criadoEm {
+    font-size: var(--f3);
+    margin: 5px;
+    color: var(--gray);
+}
+
+.tags {
+    padding-block: 10px;
+}
+
+.tags .tag {
+    font-family: var(--f3);
+    background-color: var(--tertiary);
+    color: white;
+    border-radius: 20px;
+    padding: 5px;
+}
+
+.proposta-card .footer {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    row-gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 5px;
+}
+
+.proposta-card .description {
+    margin-block: 5px;
+}

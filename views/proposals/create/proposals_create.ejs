@@ -1,3 +1,120 @@
-<!--
-comentario para manter a pagina
--->
+<head>
+  <link rel="stylesheet" href="css\proposals\create\create.css">
+</head>
+
+<body>
+  <section class="section-1">
+    <div class="titulo">
+      <h1>Criar uma Proposta</h1>
+    </div>
+  </section>
+
+  <section class="section-2">
+
+
+
+
+    <div class="container-1">
+      <div class="form-container-descricao">
+        <div class="propostas">
+          <div class="proposta-card">
+            <div class="head">
+              <h3 id="preview-titulo">Título da proposta</h3>
+              <div class="price" id="preview-preco">R$0 - R$0</div>
+            </div>
+            <p class="criadoEm"><span id="preview-data">data de criação</data></span></p>
+            <div class="tags" id="preview-tags">
+              <span class="tag">Nenhuma tag</span>
+            </div>
+            <p class="description" id="preview-descricao">A descrição da proposta aparecerá aqui.</p>
+            <div class="footer">
+            </div>
+          </div>
+        </div>
+        <textarea placeholder="descreva sua proposta para os freelancers" name="descricao" id="descricao"
+          cols="30"></textarea>
+      </div>
+    </div>
+
+
+
+    <div class="container-2">
+      <div class="form-container">
+        <label class="label-proposta" for="titulo-proposta">Título</label>
+        <input type="text" class="input" name="titulo-proposta" id="tituloProposta">
+      </div>
+
+      <div class="form-container">
+        <label class="label-proposta" for="tags">Tags</label>
+        <div class="selector-container">
+          <div class="selected-tags">
+          </div>
+
+          <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Search">
+            <button type="button" id="clear-search">Limpar</button>
+          </div>
+
+          <ul class="options-list">
+            <li data-value="Design">Design</li>
+            <li data-value="UI design">UI design</li>
+            <li data-value="3D design">3D design</li>
+            <li data-value="Canva design">Canva design</li>
+            <li data-value="UX">UX</li>
+            <li data-value="Web design">Web design</li>
+            <li data-value="Interior design">Interior design</li>
+            <li data-value="Poster design">Poster design</li>
+          </ul>
+
+
+        </div>
+      </div>
+
+      <div class="form-container-valor">
+        <h3>Valor</h3>
+        <div class="container-valor">
+          <div class="min">
+            <label class="label-proposta" for="preco-min">Min.</label>
+            <input type="number" class="input" name="preco-min" id="precoMin">
+          </div>
+          <div class="max">
+            <label class="label-proposta" for="preco-max">Max.</label>
+            <input type="number" class="input" name="preco-max" id="precoMax">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-container idade">
+        <label class="menorIdade" for="menorIdade">
+          <input type="checkbox" name="permitirMenorDeIdade" id="menorIdade">
+          Permitir menores de idade
+        </label>
+      </div>
+
+      <div class="form-container-button">
+        <button class="button-forms Cancelar" type="submit" id="Cancelar">Cancelar</button>
+        <button class="button-forms publicar" type="submit" id="publicar">Publicar</button>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="section-3">
+  </section>
+
+  <script type="module" src="js/proposals/create_proposals/proposals.js" defer></script>
+
+
+  <div id="modal-confirmacao" class="modal hidden">
+    <div class="modal-content">
+      <p>Quer criar mais uma proposta?</p>
+      <div class="modal-buttons">
+        <button id="btn-sim">Sim</button>
+        <button id="btn-nao">Não</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

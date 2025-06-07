@@ -6,9 +6,6 @@ router.get('/', (req, res) => {
     res.render('base', {
         title: 'Pagina Inicial',
         view: 'index',
-                hideNavBar: true
-
-
     })
 })
 module.exports = router

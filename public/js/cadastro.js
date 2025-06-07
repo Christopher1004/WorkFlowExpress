@@ -4,10 +4,10 @@ import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.6.0/
 import { createClient } from "https://esm.sh/@supabase/supabase-js";
 
 
-const supabaseURL = "https://uvvquwlgbkdcnchiyqzs.supabase.co"
-const supabaseChave = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2dnF1d2xnYmtkY25jaGl5cXpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0ODA2OTQsImV4cCI6MjA2MjA1NjY5NH0.SnVqdpZa1V_vjJvoupVFAXjg0_2ih7KlfUa1s3vuzhE"
+//const supabaseURL = "https://uvvquwlgbkdcnchiyqzs.supabase.co"
+//const supabaseChave = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2dnF1d2xnYmtkY25jaGl5cXpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0ODA2OTQsImV4cCI6MjA2MjA1NjY5NH0.SnVqdpZa1V_vjJvoupVFAXjg0_2ih7KlfUa1s3vuzhE"
 
-const supabase = createClient(supabaseURL, supabaseChave)
+//const supabase = createClient(supabaseURL, supabaseChave)
 
 const firebaseConfig = {
     apiKey: "AIzaSyAAtfGyZc3SLzdK10zdq-ALyTyIs1s4qwQ",
@@ -28,6 +28,17 @@ const inputEmail = document.getElementById('txtEmail')
 const inputSenha = document.getElementById('txtSenha')
 const inputConfirmarSenha = document.getElementById('tConfirmarSenha')
 const inputDataNascimento = document.getElementById('txtData')
+const mensagemErro = document.getElementById('form-error')
+
+function mostrarPopup() {
+    const popup = document.getElementById('popup');
+    popup.classList.remove('popup-hidden');
+
+    setTimeout(() => {
+        popup.classList.add('popup-hidden');
+        window.location.href = '/login';
+    }, 2000);  // 2 segundos
+}
 
 form.addEventListener('submit', async (event) => {
     event.preventDefault()
@@ -38,12 +49,14 @@ form.addEventListener('submit', async (event) => {
     const dataNascimento = inputDataNascimento.value;
 
     if (!email || !senha || !confirmarSenha || !dataNascimento) {
-        alert('Por favor, preencha todos os campos.');
+        mensagemErro.style.display = 'block'
+        inputEmail.focus()
         return;
-    }
-
+    } 
+        
     if (senha !== confirmarSenha) {
-        alert('As senhas não coincidem.');
+        mensagemErro.style.display = 'block'
+        mensagemErro.textContent = 'A senhas não coincidem'
         return;
     }
     try {
@@ -65,28 +78,7 @@ form.addEventListener('submit', async (event) => {
         };
         await set(ref(database, `Freelancer/${uid}`), userData);
 
-        const { data, error } = await supabase
-            .from('freelancer')
-            .insert([{
-                uid_firebase: uid,        // Aqui entra o UID do Firebase entre 'id' e 'cpf'
-                cpf: null,
-                nome_usuario: null,
-                email: email,
-                senha: senha,             // (Se desejar, pode remover este campo futuramente)
-                data_cadastro: new Date().toISOString(),
-                telefone: null,
-                biografia: null,
-                foto_perfil: null,
-                datanascimento: dataNascimento
-            }]);
-        if (error) {
-            console.error('Erro ao inserir no Supabase:', error.message);
-            alert('Erro ao salvar no Supabase. Tente novamente.');
-            return;
-        }
-
-        alert('Cadastro realizado com sucesso!');
-        form.reset();
+        mostrarPopup()
     }
     catch (error) {
         let errorMessage = 'Erro no cadastro: ';
@@ -103,7 +95,8 @@ form.addEventListener('submit', async (event) => {
             default:
                 errorMessage += error.message;
         }
-        alert(errorMessage);
-
+        mensagemErro.style.display = 'block'
+        mensagemErro.textContent = errorMessage
     }
 })
+

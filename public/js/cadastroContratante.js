@@ -3,10 +3,10 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } f
 import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-database.js";
 import { createClient } from "https://esm.sh/@supabase/supabase-js";
 
-const supabaseURL = "https://uvvquwlgbkdcnchiyqzs.supabase.co"
-const supabaseChave = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2dnF1d2xnYmtkY25jaGl5cXpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0ODA2OTQsImV4cCI6MjA2MjA1NjY5NH0.SnVqdpZa1V_vjJvoupVFAXjg0_2ih7KlfUa1s3vuzhE"
+//const supabaseURL = "https://uvvquwlgbkdcnchiyqzs.supabase.co"
+//const supabaseChave = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2dnF1d2xnYmtkY25jaGl5cXpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0ODA2OTQsImV4cCI6MjA2MjA1NjY5NH0.SnVqdpZa1V_vjJvoupVFAXjg0_2ih7KlfUa1s3vuzhE"
 
-const supabase = createClient(supabaseURL, supabaseChave)
+//const  supabase = createClient(supabaseURL, supabaseChave)
 
 const firebaseConfig = {
     apiKey: "AIzaSyAAtfGyZc3SLzdK10zdq-ALyTyIs1s4qwQ",
@@ -57,6 +57,17 @@ const inputEmailContratante = document.getElementById('txtEmailContra')
 const inputSenhaContrantante = document.getElementById('txtSenhaContra')
 const inputConfirmarSenhaContratante = document.getElementById('txtConfirmarSenhaContra')
 const inputDataNascimentoContratante = document.getElementById('txtDataContra')
+const mensagemErro = document.getElementById('form-error')
+
+function mostrarPopup() {
+    const popup = document.getElementById('popup');
+    popup.classList.remove('popup-hidden');
+
+    setTimeout(() => {
+        popup.classList.add('popup-hidden');
+        window.location.href = '/login';
+    }, 2000);  // 2 segundos
+}
 
 form.addEventListener('submit', async (event) => {
     event.preventDefault()
@@ -67,35 +78,20 @@ form.addEventListener('submit', async (event) => {
     const dataNascimento = inputDataNascimentoContratante.value;
     const documento = documentoInput.value.replace(/\D/g, ''); // Remove máscara
 
-    let validado = true
-
-    if (!senha || !confirmarSenha) {
-        alert('Por vaor preencha a senha e a confirmação')
-        validado = false;
+    if (!email || !senha || !confirmarSenha || !dataNascimento) {
+        mensagemErro.style.display = 'block'
+        return;
     }
-    else if (senha !== confirmarSenha) {
-        alert('As senhas não coincidem')
-        validado = false
-    }
-    if (!email) {
-        alert('Preencha o e-mail.');
-        validado = false;
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        alert('Por favor insira um e-mail válido.');
-        validado = false;
-    }
-
-    if (!dataNascimento) {
-        alert('Preencha a Data de Nascimento.');
-        validado = false;
+    if (senha !== confirmarSenha) {
+        mensagemErro.style.display = 'block'
+        mensagemErro.textContent = 'A senhas não coincidem'
+        return;
     }
 
     if (!documento || (documento.length !== 11 && documento.length !== 14)) {
-        alert('Documento inválido. CPF deve ter 11 dígitos, CNPJ 14.');
-        validado = false;
+        mensagemErro.style.display = 'block'
+        mensagemErro.textContent = 'Documento inválido. CPF deve ter 11 dígitos, CNPJ 14.'
     }
-
-    if (!validado) return;
 
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
@@ -116,46 +112,9 @@ form.addEventListener('submit', async (event) => {
         };
         await set(ref(database, `Contratante/${uid}`), userData)
 
-        //Dados supabase
+        mostrarPopup()
 
-        let tabela;
 
-        let dadosSupabase = {
-            uid_firebase: uid,
-            nome_usuario: null,
-            email: email,
-            senha: senha,
-            data_cadastro: new Date().toISOString(),
-            telefone: null,
-            biografia: null,
-            foto_perfil: null,
-            datanascimento: dataNascimento
-        }
-
-        if (documento.length === 11) {
-            tabela = 'contratantefisico'
-            dadosSupabase.cpf = documento
-        }
-        else if (documento.length === 14) {
-            tabela = 'contratantejuridico'
-            dadosSupabase.cnpj = documento
-        }
-        else {
-            throw new Error('Documento Inválido')
-        }
-        const { data, error } = await supabase
-            .from(tabela)
-            .insert([dadosSupabase])
-
-        if (error) {
-            console.error('Erro ao inserir no Supabase: ', error.message)
-            alert('Erro ao salvar no Supabase. Tente novamente.');
-
-            await firebaseUser.delete();
-            return
-        }
-        alert('Cadastro realizado com sucesso')
-        form.reset()
     }
     catch (error) {
         let errorMessage = 'Erro no cadastro: ';
