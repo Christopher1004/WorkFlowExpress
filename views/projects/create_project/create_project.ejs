@@ -2,7 +2,7 @@
 
 <div class="top-menu">
     <div class="buttons">
-        <a href="/"><button class="cancelar">Cancelar</button></a>
+        <a id="btnCancelar"><button class="cancelar">Cancelar</button></a>
         <button id="btnProximo" class="proximo">Proximo</button>
     </div>
 </div>
@@ -127,7 +127,15 @@
         </div>
     </div>
 </section>
-
+<script>
+    function formatarTexto(comando, valor = null) {
+        if (valor) {
+            document.execCommand(comando, false, valor);
+        } else {
+            document.execCommand(comando, false, null);
+        }
+    }
+</script>
 <div class="modalSalvar">
     <h2>Detalhes</h2>
     <div class="container-titulo">
@@ -149,15 +157,18 @@
             <p>Puxe ou solte por clique aqui para fazer o upload da imagem.</p>
         </div>
     </div>
-
-
-    <div class="container-descricao">
-        <label for="descricao">Descrição</label>
-        <input type="text" name="descricao" id="descricao">
-    </div>
     <div class="container-tags">
         <label for="tags">Tags</label>
-        <input type="text" name="tags" id="tags">
+        <div class="tags-disponiveis">
+            <span class="tag-btn">Design</span>
+            <span class="tag-btn">UI Design</span>
+            <span class="tag-btn">3D Design</span>
+            <span class="tag-btn">Web Design</span>
+            <span class="tag-btn">UX</span>
+            <span class="tag-btn">Interior Design</span>
+            <span class="tag-btn">Poster Design</span>
+        </div>
+
     </div>
     <div class="button-finalizar">
         <button id="btnFinalizar" class="finalizar">Finalizar</button>
@@ -165,7 +176,46 @@
 
 </div>
 
+<style>
+    .tag-chip {
+        display: inline-block;
+        background: #3c38a6;
+        padding: 5px 10px;
+        margin: 5px;
+        color: white;
+        border-radius: 15px;
+        font-size: 14px;
 
+    }
+
+    .tag-chip button {
+        background: none;
+        border: none;
+        margin-top: 2px;
+        margin-left: 5px;
+        cursor: pointer;
+    }
+
+    .tags-disponiveis {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 8px;
+    }
+
+    .tag-btn {
+        padding: 6px 12px;
+        border-radius: 20px;
+        background-color: #444;
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .tag-btn.selected {
+        background-color: #4f46e5;
+    }
+</style>
 
 
 
@@ -229,7 +279,6 @@
     }
 </style>
 <script src="js/projects/create_project/modal.js"></script>
-<script src="../../../src/js/theme.js"></script>
 <script type="module" src="/js/main.js"></script>
 <script type="module" src="/js/projects/create_project/componentesProjeto.js"></script>
 <script type="module" src="/js/projects/create_project/criarProjetoBanco.js"></script>

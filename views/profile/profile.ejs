@@ -1,26 +1,37 @@
-<link rel="stylesheet" href="/css/profile/profile.css">
+<head>
+  <link rel="stylesheet" href="/css/profile/profile.css">
+</head>
 
 <section class="section-1">
   <div class="banner" id="banner">
     <img id="imgBanner" src="default-banner.jpg" alt="banner" style="cursor:pointer;">
+    <div class="alterar-texto">CLIQUE PARA ALTERAR</div>
   </div>
+  <input type="file" id="inputBanner" accept="image/*" style="display:none" />
 </section>
 
-<input type="file" id="inputBanner" accept="image/*" style="display:none;">
-
 <section class="section-2">
-  <div class="container-1">
+  <div class="container-1" style="position: relative;">
+    <div class="profile-pic">
+      <img src="default-profile.jpg" alt="pic">
+    </div>
+
     <div class="card-infos">
       <div class="container-card-1">
-        <div class="profile-pic">
-          <img src="" alt="pic">
-        </div>
         <div class="nome">
           <h1>Nome</h1>
           <div class="tag">
             <p>UI Designer</p>
           </div>
         </div>
+        <div class="avaliacao-estrelas">
+          <span class="estrela">&#9733;</span>
+          <span class="estrela">&#9733;</span>
+          <span class="estrela">&#9733;</span>
+          <span class="estrela">&#9733;</span>
+          <span class="estrela">&#9734;</span>
+        </div>
+
         <div class="experiencia">
           <span>Profissional</span>
           <div class="exp-blocks">
@@ -32,18 +43,16 @@
         </div>
         <div class="container-card-2">
           <div class="descricao">
-            <p>Olá, estou em busca de um especialista em tráfego pago para
-              gerenciar e otimizar campanhas no Instagram, com o objetivo de atrair
-              novos clientes e aumentar as vendas da minha empresa. Sou correspondente
-              bancário e o ig da minha empresa para avaliação</p>
+            <p>Olá, estou em busca de um emprego.</p>
           </div>
         </div>
       </div>
+
       <div class="container-card-3">
         <div class="container-card-3-3">
           <div class="container-infos projetos-realizados">
-            <span class="quantidade">10</span>
-            <p>Projetos realizados</p>
+            <span class="quantidade" id="quantidadeProjetos">10</span>
+            <p id="textoProjetos">Projetos realizados</p>
           </div>
           <div class="container-infos propostas-finalizadas">
             <span class="quantidade">10</span>
@@ -51,17 +60,18 @@
           </div>
         </div>
 
-        <!-- Botão para abrir o modal -->
         <button class="editarinfos" onclick="abrirModal()">Editar informações</button>
 
-        <!-- Modal -->
         <div id="modal-editar" class="modal">
           <div class="modal-conteudo">
             <span class="fechar" onclick="fecharModal()">&times;</span>
             <h2>Editar Perfil</h2>
             <form id="form-editar">
-              <label for="fotoPerfil">Foto de Perfil:</label>
-              <input type="file" id="fotoPerfil" accept="image/*"><br>
+              <label for="fotoPerfil">Foto Perfil:</label>
+              <div class="custom-file">
+                <label for="fotoPerfil" class="file-label" id="labelFotoPerfil">Selecionar imagem</label>
+                <input type="file" id="fotoPerfil" accept="image/*" class="hidden-file">
+              </div>
 
               <label for="nome">Nome:</label>
               <input type="text" id="nome" placeholder="Digite seu nome"><br>
@@ -80,48 +90,79 @@
       </div>
     </div>
   </div>
-  <div class="container-2">
-    <main class="card-zone">
-      <div class="card_projeto">
-        <div class="capa">
-          <figure>
-            <img src="" alt="" class="thumbnail">
-          </figure>
-          <div class="thumbnail-overlay">
-            <div class="project-overlay-content">
-              <div class="like">
-                <svg width="25" height="25" viewBox="-2 -2 28 28" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd"
-                    d="M10.2366 18.4731L18.35 10.3598L18.483 10.2267L18.4809 10.2246C20.6263 7.93881 20.5826 4.34605 18.35 2.11339C16.1173 -0.11928 12.5245 -0.16292 10.2387 1.98247L10.2366 1.98036L10.2366 1.98039L10.2366 1.98037L10.2345 1.98247C7.94862 -0.162927 4.35586 -0.119289 2.12319 2.11338C-0.109476 4.34605 -0.153114 7.93881 1.99228 10.2246L1.99017 10.2268L10.2365 18.4731L10.2366 18.4731L10.2366 18.4731Z"
-                    fill="none" stroke="black" />
-                </svg>
-              </div>
-              <div class="project-title">
-                <h1>Project 1</h1>
+  <div class="projetos-wrapper">
+    <div class="profile-tabs">
+      <button class="tab-button active" data-tab="projetos" onclick="mostrarCards('projetos', event)">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="24" height="24" stroke="currentColor"
+          stroke-width="2" viewBox="0 0 24 24">
+          <rect x="3" y="3" width="7" height="7" />
+          <rect x="14" y="3" width="7" height="7" />
+          <rect x="14" y="14" width="7" height="7" />
+          <rect x="3" y="14" width="7" height="7" />
+        </svg>
+        <span>Projetos</span>
+      </button>
+      <button class="tab-button" onclick="mostrarCards('curtidos', event)">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="24" height="24" stroke="currentColor"
+          stroke-width="2" viewBox="0 0 24 24">
+          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
+                 2 5.42 4.42 3 7.5 3c1.74 0 3.41 1.01
+                 4.5 2.09C13.09 4.01 14.76 3 16.5 3
+                 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+        </svg>
+        <span>Curtidos</span>
+      </button>
+      <button class="tab-button" onclick="mostrarCards('favoritos', event)">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="24" height="24" stroke="currentColor"
+          stroke-width="2" viewBox="0 0 24 24">
+          <path d="M12 17.27L18.18 21 16.54 13.97
+                 22 9.24l-7.19-.61L12 2 9.19 8.63
+                 2 9.24l5.46 4.73L5.82 21z" />
+        </svg>
+        <span>Favoritos</span>
+      </button>
+    </div>
+
+    <div class="container-2">
+      <main class="card-zone">
+        <div class="card_projeto">
+          <div class="capa">
+            <figure>
+              <img src="" alt="" class="thumbnail">
+            </figure>
+            <div class="thumbnail-overlay">
+              <div class="project-overlay-content">
+                <div class="like">
+
+                </div>
+                <div class="project-title">
+                  <h1>Project 1</h1>
+                </div>
               </div>
             </div>
           </div>
+          <div class="autor">
+            <img src="" alt="Profile pic">
+            <h2 class="username">User</h2>
+          </div>
         </div>
-        <div class="autor">
-          <img src="" alt="Profile pic">
-          <h2 class="username">User</h2>
-        </div>
-      </div>
-    </main>
+      </main>
+    </div>
   </div>
 
 </section>
-
 <script>
-  // Modal open/close + popular inputs
+  document.querySelectorAll('.card_projeto').forEach(el => {
+    el.style.display = 'none';
+  });
+</script>
+<script type="module" src="/js/perfil.js"></script>
+<script>
   function abrirModal() {
     document.getElementById('modal-editar').style.display = 'block';
-
-    // Popula os campos com dados atuais
     const h1Nome = document.querySelector('.nome h1');
     const pTag = document.querySelector('.tag p');
     const pBio = document.querySelector('.descricao p');
-
     document.getElementById('nome').value = h1Nome.textContent || '';
     document.getElementById('tag').value = pTag.textContent || '';
     document.getElementById('bio').value = pBio.textContent || '';
@@ -137,49 +178,45 @@
       modal.style.display = "none";
     }
   }
-</script>
 
-<script>
-  // Atualiza foto de perfil preview no modal
-  const inputFotoPerfil = document.getElementById('fotoPerfil');
-
-  inputFotoPerfil.addEventListener('change', (event) => {
+  document.getElementById('fotoPerfil').addEventListener('change', (event) => {
     const file = event.target.files[0];
     if (file) {
-      const imageURL = URL.createObjectURL(file);
-      const imgPerfilModal = document.querySelector('.profile-pic img');
-      if (imgPerfilModal) imgPerfilModal.src = imageURL;
+      const imgPerfil = document.querySelector('.profile-pic img');
+      imgPerfil.src = URL.createObjectURL(file);
     }
   });
-</script>
 
-<script>
-  // Banner e input banner
-  const banner = document.getElementById('banner');
-  const imgBanner = document.getElementById('imgBanner');
-  const inputBanner = document.getElementById('inputBanner');
-
-  banner.addEventListener('click', () => {
-    inputBanner.click();
+  document.getElementById('fotoPerfil').addEventListener('change', (e) => {
+    const label = document.getElementById('labelFotoPerfil');
+    const file = e.target.files[0];
+    label.textContent = file ? file.name : 'Selecionar imagem';
   });
 
-  inputBanner.addEventListener('change', () => {
-    const file = inputBanner.files[0];
-    if (file) {
-      const url = URL.createObjectURL(file);
-      imgBanner.src = url;
-    }
-  });
+
 </script>
 
 <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
   import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-  import { getDatabase, ref, update, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+  import { getDatabase, ref, get, update, child } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
   import { createClient } from "https://esm.sh/@supabase/supabase-js";
 
-  const supabaseURL = "https://uvvquwlgbkdcnchiyqzs.supabase.co";
-  const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2dnF1d2xnYmtkY25jaGl5cXpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0ODA2OTQsImV4cCI6MjA2MjA1NjY5NH0.SnVqdpZa1V_vjJvoupVFAXjg0_2ih7KlfUa1s3vuzhE";
-  const supabase = createClient(supabaseURL, supabaseKey);
+  const firebaseConfig = {
+    apiKey: "AIzaSyAAtfGyZc3SLzdK10zdq-ALyTyIs1s4qwQ",
+    authDomain: "workflow-da28d.firebaseapp.com",
+    projectId: "workflow-da28d",
+    storageBucket: "workflow-da28d.firebasestorage.app",
+    messagingSenderId: "939828605253",
+    appId: "1:939828605253:web:0a286fe00f1c29ba614e2c",
+    measurementId: "G-3LXB7BR5M1"
+  };
+  initializeApp(firebaseConfig);
+
+  const supabase = createClient(
+    "https://uvvquwlgbkdcnchiyqzs.supabase.co",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2dnF1d2xnYmtkY25jaGl5cXpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY0ODA2OTQsImV4cCI6MjA2MjA1NjY5NH0.SnVqdpZa1V_vjJvoupVFAXjg0_2ih7KlfUa1s3vuzhE"
+  );
 
   const auth = getAuth();
   const db = getDatabase();
@@ -188,119 +225,129 @@
   const h1Nome = document.querySelector('.nome h1');
   const pTag = document.querySelector('.tag p');
   const pBio = document.querySelector('.descricao p');
+  const imgBanner = document.getElementById('imgBanner');
+  const inputBanner = document.getElementById('inputBanner');
+  const botaoEditar = document.querySelector('.editarinfos');
 
   let currentUserUid = null;
+  let currentTipoUsuario = null;
 
-  onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      currentUserUid = user.uid;
-      console.log('Usuário autenticado:', currentUserUid);
+  function getUidFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('id');
+  }
 
-      try {
-        const userRef = ref(db, `Freelancer/${currentUserUid}`);
-        const snapshot = await get(userRef);
-        if (snapshot.exists()) {
-          const data = snapshot.val();
+  const uidFromURL = getUidFromURL();
 
-          if (data.foto_perfil) imgPerfil.src = data.foto_perfil;
-          if (data.nome) h1Nome.textContent = data.nome;
-          if (data.tag) pTag.textContent = data.tag;
-          if (data.bio) pBio.textContent = data.bio;
-          if (data.banner) imgBanner.src = data.banner;
+  async function detectarTipoUsuario(uid) {
+    const dbRef = ref(db);
+    if ((await get(child(dbRef, `Freelancer/${uid}`))).exists()) return 'Freelancer';
+    if ((await get(child(dbRef, `Contratante/${uid}`))).exists()) return 'Contratante';
+    return null;
+  }
 
-          console.log('Dados carregados do usuário:', data);
-        }
-      } catch (err) {
-        console.error("Erro ao carregar dados do usuário:", err);
-      }
-    } else {
-      currentUserUid = null;
-      console.log('Usuário não autenticado');
-    }
-  });
-
-  async function uploadImageToSupabase(file, folder) {
-    const filePath = `${folder}/${Date.now()}_${file.name}`;
-    const { data, error } = await supabase.storage
-      .from('freelancer-photos')
-      .upload(filePath, file);
-
+  async function uploadImageToSupabase(file, folder, bucketName) {
+    const path = `${folder}/${Date.now()}_${file.name}`;
+    const { error } = await supabase.storage.from(bucketName).upload(path, file);
     if (error) throw error;
-
-    const { data: publicUrlData } = supabase.storage
-      .from('freelancer-photos')
-      .getPublicUrl(filePath);
-
+    const { data: publicUrlData } = supabase.storage.from(bucketName).getPublicUrl(path);
     return publicUrlData.publicUrl;
   }
 
-  const formEditar = document.getElementById('form-editar');
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) return;
 
-  formEditar.addEventListener('submit', async (event) => {
-    event.preventDefault();
+    const loggedInUid = user.uid;
+    currentUserUid = uidFromURL || loggedInUid;
 
-    if (!currentUserUid) {
-      alert("Usuário não autenticado");
-      return;
+    currentTipoUsuario = await detectarTipoUsuario(currentUserUid);
+    if (!currentTipoUsuario) return;
+
+    const snap = await get(ref(db, `${currentTipoUsuario}/${currentUserUid}`));
+    if (snap.exists()) {
+      const data = snap.val();
+      if (data.foto_perfil) imgPerfil.src = data.foto_perfil;
+      if (data.nome) h1Nome.textContent = data.nome;
+      if (data.tag) pTag.textContent = data.tag;
+      if (data.bio) pBio.textContent = data.bio;
+      if (data.banner) imgBanner.src = data.banner;
     }
 
+    if (currentUserUid === loggedInUid) {
+      botaoEditar.style.display = 'block';
+      imgBanner.style.cursor = 'pointer';
+      document.getElementById('banner').classList.add('editable');
+
+      document.getElementById('banner').addEventListener('click', () => {
+        inputBanner.click();
+      });
+    } else {
+      botaoEditar.style.display = 'none';
+      imgBanner.style.cursor = 'default';
+      document.getElementById('banner').classList.remove('editable');
+    }
+
+  });
+
+
+  document.getElementById('form-editar').addEventListener('submit', async (e) => {
+    e.preventDefault();
     const nome = document.getElementById('nome').value.trim();
     const tag = document.getElementById('tag').value.trim();
     const bio = document.getElementById('bio').value.trim();
-    const fotoPerfilInput = document.getElementById('fotoPerfil');
-    const fotoPerfilFile = fotoPerfilInput.files[0];
+    const fotoFile = document.getElementById('fotoPerfil').files[0];
 
-    const updates = {};
-
-    if (nome) updates.nome = nome;
-    if (tag) updates.tag = tag;
-    if (bio) updates.bio = bio;
-
+    const updates = { nome, tag, bio };
     try {
-      if (fotoPerfilFile) {
-        const fotoUrl = await uploadImageToSupabase(fotoPerfilFile, currentUserUid);
-        updates.foto_perfil = fotoUrl;
-        imgPerfil.src = fotoUrl;
+      const bucket = currentTipoUsuario === 'Freelancer' ? 'freelancer-photos' : 'contratante-photos';
+
+      if (fotoFile) {
+        updates.foto_perfil = await uploadImageToSupabase(fotoFile, currentUserUid, bucket);
       }
 
-      const userRef = ref(db, `Freelancer/${currentUserUid}`);
-      await update(userRef, updates);
+      await update(ref(db, `${currentTipoUsuario}/${currentUserUid}`), updates);
 
-      // Atualiza os textos na tela (mesmo que o Firebase já esteja atualizado)
-      if (updates.nome !== undefined) h1Nome.textContent = updates.nome;
-      if (updates.tag !== undefined) pTag.textContent = updates.tag;
-      if (updates.bio !== undefined) pBio.textContent = updates.bio;
+      h1Nome.textContent = nome;
+      pTag.textContent = tag;
+      pBio.textContent = bio;
 
-      console.log("Dados atualizados:", updates);
-
-      formEditar.reset();
       fecharModal();
+
+      location.reload();
+
     } catch (err) {
-      console.error("Erro ao atualizar dados:", err);
-      alert("Erro ao salvar. Tente novamente.");
+      console.error("Erro ao salvar:", err);
     }
   });
 
-  // Evento para atualizar banner no Supabase e Firebase (similar a fotoPerfil)
+
   inputBanner.addEventListener('change', async () => {
     const file = inputBanner.files[0];
-    if (!file) return;
-
-    if (!currentUserUid) {
-      alert("Usuário não autenticado");
-      return;
-    }
+    if (!file || !currentUserUid || !currentTipoUsuario) return;
 
     try {
-      const bannerUrl = await uploadImageToSupabase(file, currentUserUid);
+      const bucket = currentTipoUsuario === 'Freelancer' ? 'freelancer-photos' : 'contratante-photos';
+      const bannerUrl = await uploadImageToSupabase(file, currentUserUid, bucket);
       imgBanner.src = bannerUrl;
+      await update(ref(db, `${currentTipoUsuario}/${currentUserUid}`), { banner: bannerUrl });
 
-      const userRef = ref(db, `Freelancer/${currentUserUid}`);
-      await update(userRef, { banner: bannerUrl });
+      location.reload();
 
-      console.log("Banner atualizado:", bannerUrl);
     } catch (error) {
       console.error("Erro ao atualizar banner:", error);
     }
   });
+
+</script>
+<script>
+  function mostrarCards(tipo) {
+    document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+
+    console.log("Selecionado:", tipo);
+
+    document.querySelectorAll('.card_projeto').forEach(el => {
+      el.style.display = 'block';
+    });
+  }
 </script>
