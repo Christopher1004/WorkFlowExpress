@@ -1,32 +1,32 @@
-const express = require('express')
-const path = require('path')
-const app = express()
+const express = require('express');
+const path = require('path');
+const app = express();
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: true}))
+app.use(express.json());
+app.use(express.urlencoded({ extended: true}));
 
-app.use(express.static("public"))
-app.set('views', path.join(__dirname, 'views'))
-app.set('view engine',"ejs")
+app.use(express.static("public"));
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine',"ejs");
 const expressLayouts = require('express-ejs-layouts');
-app.use(expressLayouts)
-app.set('layout', 'base')
+app.use(expressLayouts);
+app.set('layout', 'base');
 app.use((req,res,next) => {
     res.locals.currentRoute = req.path;
     next();
 })
 
-const indexRouter = require('./routes/index')
-app.use('/', indexRouter)
-const freelancerRouter = require('./routes/Freelancer/freelancer')
-app.use('/freelancer', freelancerRouter)
-const freelancersRouter = require('./routes/freelancers')
-app.use('/freelancers', freelancersRouter)
-const contratanteRouter = require('./routes/Contratante/contratante')
+const indexRouter = require('./routes/index');
+app.use('/', indexRouter);
+const freelancerRouter = require('./routes/Freelancer/freelancer');
+app.use('/freelancer', freelancerRouter);
+const freelancersRouter = require('./routes/freelancers');
+app.use('/freelancers', freelancersRouter);
+const contratanteRouter = require('./routes/Contratante/contratante');
 app.use('/contratante', contratanteRouter)
-const registerRouter = require('./routes/register')
+const registerRouter = require('./routes/register');
 app.use('/register', registerRouter)
-const loginRouter = require('./routes/login')
+const loginRouter = require('./routes/login');
 app.use('/login', loginRouter)
 const propostaRouter = require('./routes/propostas')
 app.use('/propostas', propostaRouter)
